@@ -1,4 +1,4 @@
-var c, can, ctx, currentImage, savedCanvas;
+var c, can, ctx, currentImage;
 
 $(window).load(function() {
     c = $("canvas")[0];
@@ -17,7 +17,11 @@ $(window).load(function() {
         linkIO.connect("localhost:8080", $(".user").val());
 
         linkIO.onUsersInRoomChange(function(users) {
-            $(".users").html("Users: " + users.join(', '));
+            var str = "Users: ";
+            for(var i = 0; i<users.length; i++) {
+                str += users[i].login + (i < users.length - 1 ? ", " : ".");
+            }
+            $(".users").html(str);
         });
 
         linkIO.on("graphical-ask", function(e) {
@@ -74,8 +78,14 @@ $(window).load(function() {
             });
         }
         else {
-            linkIO.joinRoom(g, function(id) {
+            linkIO.joinRoom(g, function(id, users) {
                 $(".group").val(id);
+
+                var str = "Users: ";
+                for(var i = 0; i<users.length; i++) {
+                    str += users[i].login + (i < users.length - 1 ? ", " : ".");
+                }
+                $(".users").html(str);
             });
         }
     });
