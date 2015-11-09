@@ -8,6 +8,8 @@ var linkIO = new __LinkIO();
 function __LinkIO() {
     this.socket = undefined;
     this.eventHandlers = {};
+    this.currentRoom = "";
+    this.joinRoomHandler = function() {};
 }
 
 __LinkIO.prototype.connect = function(serverUrl, user) {
@@ -16,6 +18,11 @@ __LinkIO.prototype.connect = function(serverUrl, user) {
     var that = this;
 
     bindEvent(this);
+    socket.on('reconnect', function() {
+        if(that.currentRoom != "") {
+            that.joinRoom(that.currentRoom != 'crash' ? that.currentRoom : 'abcd', that.joinRoomHandler);
+        }
+    })
 }
 
 function bindEvent(linkIO) {
@@ -28,11 +35,17 @@ function bindEvent(linkIO) {
 
 __LinkIO.prototype.createRoom = function(cb) {
     this.__checkInit();
-    this.socket.emit("createRoom", "", cb);
+    var that = this;
+    this.socket.emit("createRoom", "", function(id) {
+        that.currentRoom = id;
+        cb();
+    });
 }
 
 __LinkIO.prototype.joinRoom = function(id, cb) {
     this.__checkInit();
+    this.currentRoom = id;
+    this.joinRoomHandler = cb;
     this.socket.emit("joinRoom", id, cb);
 }
 
