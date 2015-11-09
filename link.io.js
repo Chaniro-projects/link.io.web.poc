@@ -14,9 +14,14 @@ __LinkIO.prototype.connect = function(serverUrl, user) {
     this.socket = io(serverUrl + "?user=" + user);
     socket = this.socket;
     var that = this;
-    this.socket.on("event", function(e) {
-        if(typeof e.type != 'undefined' && typeof that.eventHandlers[e.type] != 'undefined') {
-            that.eventHandlers[e.type](e.data);
+
+    bindEvent(this);
+}
+
+function bindEvent(linkIO) {
+    linkIO.socket.on("event", function(e) {
+        if(typeof e.type != 'undefined' && typeof linkIO.eventHandlers[e.type] != 'undefined') {
+            linkIO.eventHandlers[e.type](e.data);
         }
     });
 }
@@ -53,6 +58,7 @@ __LinkIO.prototype.emit = function(name, data, receiveAlso) {
     ev.data = data;
     ev.type = name;
     ev.me = receiveAlso;
+
     this.socket.emit("event", ev);
 }
 

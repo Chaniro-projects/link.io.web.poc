@@ -38,6 +38,10 @@ $(window).load(function() {
             });
         });
 
+        linkIO.on("test", function(e) {
+            console.log(e);
+        });
+
         linkIO.on("line", function(e) {
             drawLine(e.fromX, e.fromY, e.toX, e.toY, e.color);
         });
@@ -257,6 +261,7 @@ function readImage(input, cb) {
     if ( input.files && input.files[0] ) {
         var FR= new FileReader();
         FR.onload = function(e) {
+            console.log(e.target.result.length);
             cb(e.target.result);
         };
         FR.readAsDataURL( input.files[0] );
