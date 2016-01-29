@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>connect.IO</title>
+    <title>Link.IO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script src="http://192.168.0.101:8080/socket.io/socket.io.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="link.io.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 
@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="well">
-                    <h1>Connect.IO</h1>
+                    <h1 class="text-center"><img src="img/logo.png" alt=""/> Link.IO</h1>
                     <hr/>
                     <div class="row">
                         <div class="col-md-4">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="col-md-2 control-label">Group:</label>
+                                <label class="col-md-2 control-label">Room:</label>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control group" value="abcd"/>
                                 </div>
@@ -62,10 +62,10 @@
                     </div>
                     <hr/>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="users"></div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 hide">
                             <b>Events/s:</b>
                             <span class="events">?</span>
                         </div>

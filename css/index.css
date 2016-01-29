@@ -6,3 +6,8 @@ body {
     margin: 0;
     padding: 0;
 }
+h1 img {
+    max-height: 80px;
+    display: inline-block;
+    margin-right: 20px;
+}
