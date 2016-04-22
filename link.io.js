@@ -12,8 +12,9 @@ function __LinkIO() {
     this.joinRoomHandler = function() {};
 }
 
-__LinkIO.prototype.connect = function(serverUrl, user) {
-    this.socket = io(serverUrl + "?user=" + user);
+__LinkIO.prototype.connect = function(serverUrl, mail, password) {
+	console.log(serverUrl + "?mail=" + encodeURIComponent(mail) + "&password=" + encodeURIComponent(password) + "&api_key=EoOcWn8IJSRx5N50fEpg");
+    this.socket = io(serverUrl + "?mail=" + encodeURIComponent(mail) + "&password=" + encodeURIComponent(password) + "&api_key=EoOcWn8IJSRx5N50fEpg");
     socket = this.socket;
     var that = this;
 

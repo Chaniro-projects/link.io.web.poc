@@ -14,12 +14,14 @@ $(window).load(function() {
     var socket;
 
     $(".login").click(function() {
-        linkIO.connect("localhost:8080", $(".user").val());
+
+        linkIO.connect("localhost:8080", $(".user").val(), "1234");
 
         linkIO.onUsersInRoomChange(function(users) {
+			console.log(users);
             var str = "Users: ";
             for(var i = 0; i<users.length; i++) {
-                str += users[i].login + (i < users.length - 1 ? ", " : ".");
+                str += users[i].mail + (i < users.length - 1 ? ", " : ".");
             }
             $(".users").html(str);
         });
@@ -87,7 +89,7 @@ $(window).load(function() {
 
                 var str = "Users: ";
                 for(var i = 0; i<users.length; i++) {
-                    str += users[i].login + (i < users.length - 1 ? ", " : ".");
+                    str += users[i].mail + (i < users.length - 1 ? ", " : ".");
                 }
                 $(".users").html(str);
             });
